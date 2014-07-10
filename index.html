@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Centennial Equipment Tank Volume Calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--<meta name="apple-mobile-web-app-capable" content="yes">-->
+<!--
+    <meta name="apple-itunes-app" content="app-id=SOMETHING">
+    <meta property="og:url" content="https://itunes.apple.com/ms/app/SOMETHING"/>
+    <link rel="canonical" href="https://itunes.apple.com/ms/app/SOMETHING"/>
+-->
+
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css"/>
+    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css"/>
+    <link rel="stylesheet" href="css/CETVCRolled.min.css"/>
+    <link rel="stylesheet" href="css/cetvc.css"/>
+    
+<!-- gonna need this stuff? 
+    <link rel="stylesheet" href="css/mobiscroll.scroller.css"/>
+    <link rel="stylesheet" href="css/mobiscroll.scroller.ios7.css"/>
+-->
+
+</head>
+<!--
+ Themes:
+ a = light
+ b = dark
+-->
+
+<body onload="init();">
+
+	<div data-role="panel" id="mainMenu" data-position="left" data-display="overlay" data-theme="a"  data-position-fixed="true">
+
+        <ul data-role="listview" data-inset="false"><!-- class="ui-nodisc-icon" -->
+          <li data-icon="home"><a href="#home">Home</a></li>
+          <li data-icon="bars"><a href="#tankGeometry">Tank Geometry</a></li>            
+          <li data-icon="grid"><a href="#tankCalc">Calculation Results</a></li>
+          <li data-icon="camera"><a href="#tankDisplay">Tank Display</a></li> 
+          <!--<li data-icon="grid"><a href="#tankCalcSaved">Saved Results</a></li>-->
+        </ul>
+        <p>
+          &nbsp;<br>
+          <a data-rel="close" data-theme="a" data-icon="delete" data-role="button" data-iconpos="left">Close menu</a>
+        </p>
+
+	</div>
+     
+     
+<div class="SVGFiles" style="position: absolute; width:0; height:0; max-width: 1px; left: -2px;overflow: hidden;">
+<!-- LOGO -->
+<svg version="1.1" baseProfile="basic" id="Layer_1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="398.149px"
+	 height="398.14px" viewBox="0 0 398.149 398.14" xml:space="preserve">
+<g id="CELogo">
+	<g>
+		<path fill="#39659A" d="M183.002,15.308L195.392,0c-34.444,0.626-66.751,9.991-94.796,25.982
+			C145.354,12.144,183.002,15.308,183.002,15.308z"/>
+		<path fill="#39659A" d="M59.338,78.656l-1.807-19.614C31.279,85.577,12.44,119.453,4.359,157.317
+			C27.134,112.102,59.338,78.656,59.338,78.656z"/>
+		<path fill="#39659A" d="M314.372,54.83l19.848-1.979c-26.435-24.443-59.506-41.807-96.212-49.083
+			C283.123,25.528,314.372,54.83,314.372,54.83z"/>
+		<path fill="#39659A" d="M15.272,214.652L0,202.222c0.611,39.388,12.654,75.995,32.964,106.657
+			C16.624,261.003,15.272,214.652,15.272,214.652z"/>
+		<path fill="#39659A" d="M382.822,182.738l15.327,12.37c-0.77-39.372-12.963-75.94-33.407-106.531
+			C381.28,136.389,382.822,182.738,382.822,182.738z"/>
+		<path fill="#39659A" d="M339.464,318.74l1.911,19.6c26.1-26.664,44.771-60.626,52.65-98.549
+			C371.494,285.129,339.464,318.74,339.464,318.74z"/>
+		<path fill="#39659A" d="M80.94,340.744l-19.591,2.124c26.918,25.79,61.065,44.087,99.096,51.565
+			C114.882,372.395,80.94,340.744,80.94,340.744z"/>
+		<path fill="#39659A" d="M214.148,382.923l-10.9,15.217c38.802-0.797,74.871-12.695,105.174-32.646
+			C260.501,381.7,214.148,382.923,214.148,382.923z"/>
+		<path fill="#39659A" d="M323.67,245.346c0.47-3.171,5.068-3.154,5.448-0.124c0.273,2.18,4.011,28.778,4.011,28.778
+			c24.098-17.601,50.707-58.652,60.25-74.097c-9.933,0.118-23.522,0.275-25.133,0.271c-3.409-0.011-5.1-1.182-7.094-3.798
+			c-1.42-1.864-40.453-52.052-41.767-53.787c-1.934-2.556,1.3-5.826,3.729-3.974c1.747,1.332,23.345,17.3,23.345,17.3
+			c3.97-27.108-5.351-72.259-10.33-93.408c-7.168,7.632-15.659,16.659-16.692,17.686c-2.417,2.403-4.441,2.771-7.701,2.333
+			c-2.321-0.313-65.414-8.18-67.569-8.477c-3.175-0.439-3.202-5.038-0.176-5.447c2.178-0.294,28.739-4.284,28.739-4.284
+			C256.604,42.677,218.98,17.78,200.195,6.117c0.102,9.773,0.228,22.252,0.221,23.792c-0.016,3.409-1.189,5.098-3.808,7.088
+			c-1.866,1.417-52.109,40.381-53.846,41.692c-2.559,1.93-5.824-1.308-3.969-3.734c1.335-1.746,17.333-23.321,17.333-23.321
+			c-25.695-3.799-69.623,2.324-91.938,7.396C70.916,65.793,80.979,75.907,82,76.964c2.367,2.452,2.705,4.481,2.218,7.734
+			c-0.348,2.318-9.15,65.287-9.479,67.438c-0.485,3.167-5.084,3.127-5.448,0.094c-0.262-2.183-3.856-28.8-3.856-28.8
+			c-22.851,16.503-49.591,56.392-60.771,74.015c9.944-0.077,23.641-0.179,25.258-0.167c3.408,0.025,5.095,1.204,7.077,3.829
+			c1.414,1.868,40.24,52.217,41.546,53.956c1.924,2.564-1.323,5.821-3.745,3.959c-1.741-1.339-23.272-17.396-23.272-17.396
+			c-4.127,27.404,5.265,73.313,10.112,94.162c6.898-7.088,16.119-16.556,17.243-17.676c2.414-2.406,4.438-2.776,7.698-2.342
+			c2.323,0.309,65.425,8.092,67.58,8.387c3.176,0.435,3.209,5.033,0.183,5.446c-2.177,0.297-28.732,4.321-28.732,4.321
+			c16.588,22.202,53.447,46.355,71.194,57.27c-0.003-10.243-0.003-21.591,0.011-22.968c0.034-3.408,1.218-5.091,3.848-7.066
+			c1.873-1.408,52.329-40.095,54.072-41.396c2.569-1.916,5.817,1.34,3.948,3.756c-1.344,1.737-17.46,23.225-17.46,23.225
+			c29.309,4.498,77.221-3.903,94.546-7.297c-7.095-7.055-17.771-17.677-18.958-18.895c-2.38-2.439-2.729-4.467-2.259-7.723
+			C314.887,310.512,323.353,247.498,323.67,245.346z M209.725,176.021h-47.671v-34.663c0-0.913-1.231-3.892-4.212-3.892
+			c-2.981,0-4.213,2.979-4.213,3.892v116.888c0,0.913,1.231,3.892,4.213,3.892c2.98,0,4.212-2.979,4.212-3.892v-46.775h47.671
+			v62.169c0,15.833-12.955,28.715-28.88,28.715h-44.587c-15.932,0-27.906-13.886-27.906-29.715V129.52
+			c0-16.205,14.128-32.715,29.958-32.715h42.535c15.925,0,28.88,12.882,28.88,28.715V176.021z M289.417,139.65h-23.602v29.306
+			h23.602v39.416h-23.602v49.251h23.602v41.249h-73.915V96.622h73.915V139.65z"/>
+	</g>
+	<g>
+		<path fill="#39659A" d="M170.394,220.08v40.167c0,6.903-5.597,12.5-12.5,12.5s-12.5-5.597-12.5-12.5V141.359
+			c0-6.904,5.597-12.5,12.5-12.5s12.5,5.596,12.5,12.5v26.054h30.667V125.52c0-11.105-8.849-20.107-19.765-20.107h-41.471
+			c-10.916,0-22.765,13.002-22.765,24.107v143.121c0,11.104,9.849,21.106,20.765,21.106h43.471c10.916,0,19.765-9.002,19.765-20.106
+			V220.08H170.394z"/>
+		<polygon fill="#39659A" points="279.727,128.859 279.727,105.413 256.727,105.413 227.061,105.413 227.061,128.859 
+			227.061,268.413 227.061,290.08 256.727,290.08 279.727,290.08 279.727,268.413 256.727,268.413 256.727,199.58 279.727,199.58 
+			279.727,177.747 256.727,177.747 256.727,128.859 		"/>
+	</g>
+</g>
+</svg>
+<!-- END logo -->
+<!-- Tank Sample -->
+<svg version="1.1" baseProfile="basic" id="Layer_1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 800 600" xml:space="preserve">
+<pattern  y="600" width="28.8" height="28.8" patternUnits="userSpaceOnUse" id="_x31_0_dpi_20_x25_" viewBox="15.84 -30.24 28.8 28.8" overflow="visible">
+	<g>
+		<polygon fill="none" points="15.84,-1.439 15.84,-30.24 44.64,-30.24 44.64,-1.439 		"/>
+		<path fill="#231F20" d="M44.64,0c0.795,0,1.439-0.645,1.439-1.439c0-0.796-0.645-1.44-1.439-1.44c-0.796,0-1.44,0.645-1.44,1.44
+			C43.2-0.645,43.844,0,44.64,0z"/>
+		<path fill="#231F20" d="M30.24,0c0.795,0,1.44-0.645,1.44-1.439c0-0.796-0.646-1.44-1.44-1.44c-0.796,0-1.439,0.645-1.439,1.44
+			C28.8-0.645,29.444,0,30.24,0z"/>
+		<path fill="#231F20" d="M15.84,0c0.795,0,1.439-0.645,1.439-1.439c0-0.796-0.645-1.44-1.439-1.44c-0.797,0-1.44,0.645-1.44,1.44
+			C14.4-0.645,15.043,0,15.84,0z"/>
+		<path fill="#231F20" d="M44.64-14.399c0.795,0,1.439-0.646,1.439-1.44c0-0.796-0.645-1.44-1.439-1.44
+			c-0.796,0-1.44,0.645-1.44,1.44C43.2-15.045,43.844-14.399,44.64-14.399z"/>
+		<path fill="#231F20" d="M30.24-14.399c0.795,0,1.44-0.646,1.44-1.44c0-0.796-0.646-1.44-1.44-1.44
+			c-0.796,0-1.439,0.645-1.439,1.44C28.8-15.045,29.444-14.399,30.24-14.399z"/>
+		<path fill="#231F20" d="M15.84-14.399c0.795,0,1.439-0.646,1.439-1.44c0-0.796-0.645-1.44-1.439-1.44
+			c-0.797,0-1.44,0.645-1.44,1.44C14.4-15.045,15.043-14.399,15.84-14.399z"/>
+		<path fill="#231F20" d="M44.64-28.8c0.795,0,1.439-0.645,1.439-1.44s-0.645-1.44-1.439-1.44c-0.796,0-1.44,0.645-1.44,1.44
+			S43.844-28.8,44.64-28.8z"/>
+		<path fill="#231F20" d="M30.24-28.8c0.795,0,1.44-0.645,1.44-1.44s-0.646-1.44-1.44-1.44c-0.796,0-1.439,0.645-1.439,1.44
+			S29.444-28.8,30.24-28.8z"/>
+		<path fill="#231F20" d="M15.84-28.8c0.795,0,1.439-0.645,1.439-1.44s-0.645-1.44-1.439-1.44c-0.797,0-1.44,0.645-1.44,1.44
+			S15.043-28.8,15.84-28.8z"/>
+		<path fill="#231F20" d="M1.44-28.8c0.795,0,1.44-0.645,1.44-1.44s-0.645-1.44-1.44-1.44c-0.796,0-1.44,0.645-1.44,1.44
+			S0.644-28.8,1.44-28.8z"/>
+		<path fill="#231F20" d="M1.44-30.24"/>
+		<path fill="#231F20" d="M23.04-7.2c0.795,0,1.44-0.645,1.44-1.439c0-0.796-0.646-1.44-1.44-1.44c-0.796,0-1.439,0.645-1.439,1.44
+			C21.6-7.845,22.244-7.2,23.04-7.2z"/>
+		<path fill="#231F20" d="M37.44-7.2c0.795,0,1.44-0.645,1.44-1.439c0-0.796-0.646-1.44-1.44-1.44c-0.796,0-1.44,0.645-1.44,1.44
+			C36-7.845,36.644-7.2,37.44-7.2z"/>
+		<path fill="#231F20" d="M23.04-21.601c0.795,0,1.44-0.645,1.44-1.439c0-0.796-0.646-1.44-1.44-1.44
+			c-0.796,0-1.439,0.645-1.439,1.44C21.6-22.245,22.244-21.601,23.04-21.601z"/>
+		<path fill="#231F20" d="M37.44-21.601c0.795,0,1.44-0.645,1.44-1.439c0-0.796-0.646-1.44-1.44-1.44c-0.796,0-1.44,0.645-1.44,1.44
+			C36-22.245,36.644-21.601,37.44-21.601z"/>
+		<path fill="#231F20" d="M8.64-21.601c0.795,0,1.44-0.645,1.44-1.439c0-0.796-0.645-1.44-1.44-1.44c-0.796,0-1.44,0.645-1.44,1.44
+			C7.2-22.245,7.844-21.601,8.64-21.601z"/>
+		<path fill="#231F20" d="M8.64-23.04"/>
+	</g>
+</pattern>
+<path id="tankTestFill" d="M150.583,319v178.404c0,55.858,111.572,101.141,249.203,101.141c137.63,0,249.201-45.282,249.201-101.141
+	V319H150.583z"/>
+<path id="tankTestOutline1" stroke-width="4" d="M150.583,0v498.404c0,55.858,111.572,101.141,249.203,101.141c137.63,0,249.201-45.282,249.201-101.141V0H150.583z"/>
+<path id="tankTestOutline" d="M100,0v500C150,600,500,600,500,500V0H100z" /> <!--ellipsodial-->
+
+</svg>
+<!-- END Tank Sample -->
+</div>
+
+<div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-left">
+          <a href="#mainMenu" data-icon="bars" data-iconpos="notext" data-role="button">Menu</a>
+        </div>
+        <h1>
+        <svg version="1.1" baseProfile="basic" id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+        height="40px" viewBox="0 0 398.149 398.14" xml:space="preserve">
+            <use xlink:href="#CELogo"></use>
+        </svg>
+        </h1>
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-right">
+          <a href="#about" data-role="button" data-icon="info" data-iconpos="notext" data-transition="slidefade">Info</a>
+        </div>
+    </div>
+    
+    <div data-role="content">
+        <h2>CE Tank Volume Calcularot</h2>
+        <p>
+          Centennial Equipment has been solving your fluid handling problems since 1958 serving our customers in Colorado, Wyoming and the Rocky Mountain region. You have found the most experienced and expert pump and mixer specialists in the Rocky Mountains. 
+          
+         Ready to calculate the volume of your tank?
+        </p>
+        <a href="#tankGeometry" data-role="button" data-icon="arrow-r" data-iconpos="right">Get Started</a>
+
+    </div>
+         
+</div>
+
+
+
+<div data-role="page" id="about">
+    <div data-role="header" data-position="fixed">
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-left">
+          <a href="#mainMenu" data-icon="bars" data-iconpos="notext" data-role="button">Menu</a>
+        </div>
+        <h1>
+        <svg version="1.1" baseProfile="basic" id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+        height="40px" viewBox="0 0 398.149 398.14" xml:space="preserve">
+            <use xlink:href="#CELogo"></use>
+        </svg>
+        </h1>
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-right">
+          <a href="#about" data-role="button" data-icon="info" data-iconpos="notext" data-transition="slidefade">Info</a>
+        </div>
+    </div>
+    
+    <div data-role="content">
+        <h2>Information</h2>
+        <p>
+          This page contains information. Maybe it's an "about" page for Centennial Equipment, maybe it's for information about tank volume, what
+          tanks are useful for what purposes, etc.
+        </p>
+        <p>
+            <a data-rel="back" data-role="button">Back</a>
+        </p>
+    </div>
+         
+</div>
+
+
+
+
+<div data-role="page" id="tankDisplay" data-theme="b">
+    <div data-role="header" data-position="fixed">
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-left">
+          <a href="#mainMenu" data-icon="bars" data-iconpos="notext" data-role="button">Menu</a>
+        </div>
+        <h1>
+        <svg version="1.1" baseProfile="basic" id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+        height="40px" viewBox="0 0 398.149 398.14" xml:space="preserve">
+            <use xlink:href="#CELogo"></use>
+        </svg>
+        </h1>
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-right">
+          <a href="#about" data-role="button" data-icon="info" data-iconpos="notext" data-transition="slidefade">Info</a>
+        </div>
+    </div>
+    
+    <div data-role="content">
+    
+
+      <div class="tankDisplayImage">
+
+<svg version="1.1" baseProfile="basic" id="Layer_1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 600 600" xml:space="preserve">
+	<defs>
+		<linearGradient id="grad1" x1="0%" y1="100%" x2="0%" y2="0%">
+		  <stop offset="0%" style="stop-color:#39659A;stop-opacity:1" />
+		  <stop class="stop_lower" offset="20%" style="stop-color:#39659A;stop-opacity:1" />
+		  <stop class="stop_upper" offset="21%" style="stop-color:rgba(5,5,5,0);stop-opacity:0" />
+		  <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+		</linearGradient>
+	  </defs> 
+  <use xlink:href="#tankTestFill" fill="url(#grad1)"></use>
+  <use xlink:href="#tankTestOutline"></use>
+</svg>
+
+      </div>
+      <a href="#tankCalc" data-role="button" data-icon="arrow-l" data-iconpos="left">Back to Results</a>
+    </div>
+</div>
+
+
+
+
+<div data-role="page" id="tankGeometry" data-theme="a">
+    <div data-role="header" data-position="fixed">
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-left">
+          <a href="#mainMenu" data-icon="bars" data-iconpos="notext" data-role="button">Menu</a>
+        </div>
+        <h1>
+        <svg version="1.1" baseProfile="basic" id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+        height="40px" viewBox="0 0 398.149 398.14" xml:space="preserve">
+            <use xlink:href="#CELogo"></use>
+        </svg>
+        </h1>
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-right">
+          <a href="#about" data-role="button" data-icon="info" data-iconpos="notext" data-transition="slidefade">About</a>
+        </div>
+    </div>
+    
+    <div data-role="content">
+      <div class="ui-grid-a">
+        <!--<div class="ui-block-a">-->
+          <strong>Set Shape</strong>
+          <form id="shape">
+            <fieldset data-role="controlgroup">
+              <select name="shapeType" id="shapeType">
+                <option value="none">Shape Type</option>
+                <option value="Cylindrical">Cylindrical</option>
+                <option value="Rectangular">Rectangular</option>
+              </select>
+            </fieldset>
+            
+            <div class="shape_cyl">
+            <fieldset data-role="controlgroup">
+              <select name="shapeTop" id="shapeTop_Cylindrical">
+                <option value="none">Top Style</option>
+                <option value="Flat">Flat</option>
+                <option value="ASME">ASME</option>
+                <option value="Hemispherical">Hemispherical</option>
+                <option value="Elipsoidal">Elipsoidal</option>
+                <option value="Conical">Conical</option>
+              </select>
+            </fieldset>
+            
+            <fieldset data-role="controlgroup">
+              <select name="shapeBottom" id="shapeBottom_Cylindrical">
+                <option value="none">Bottom Style</option>
+                <option value="Flat">Flat</option>
+                <option value="ASME">ASME</option>
+                <option value="Hemispherical">Hemispherical</option>
+                <option value="Elipsoidal">Elipsoidal</option>
+                <option value="Conical">Conical</option>
+              </select>
+            </fieldset>
+            </div>
+            <div class="shape_rect" style="display:none;">
+            <fieldset data-role="controlgroup">
+              <select name="shapeTop" id="shapeTop_Rectangular">
+                <option value="none">Top Style</option>
+                <option value="Flat">Flat</option>
+              </select>
+            </fieldset>
+            
+            <fieldset data-role="controlgroup">
+              <select name="shapeBottom" id="shapeBottom_Rectangular">
+                <option value="none">Bottom Style</option>
+                <option value="Flat">Flat</option>
+              </select>
+            </fieldset>
+            </div>
+          </form>
+       <!-- </div>-->
+        <!--<div class="ui-block-b">
+
+          <div class="ui-body tankDisplayImage">
+          <svg version="1.1" baseProfile="basic" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 800 600" xml:space="preserve">
+              <use xlink:href="#tankTestFill"></use>
+              <use xlink:href="#tankTestOutline"></use>
+          </svg>
+          </div>
+        </div>-->
+      </div>
+      <form id="dimensions">  
+        <div class="chooseUnits ui-grid-a">
+             <div class="ui-block-a">
+                 <strong>Set Dimensions</strong>
+             </div>
+             <div class="ui-block-b unitSelect">
+                   <select name="units" id="units" data-role="slider" style=" width: 100%">
+                     <option value="english">English</option>
+                     <option value="metric">Metric</option>
+                   </select>
+             </div>
+        </div>
+             
+        <div class="setDimensions ui-grid-b">
+             <div class="cylinder_value">
+             <!-- -->
+             <div class="ui-block-a">
+                     <strong>Diameter</strong>
+             </div>
+             <div class="ui-block-b">
+                 <div class="englishUnits">
+                     <input type="range" name="diameterSliderFt" id="diameterSliderFt" value="100" min="0" max="200" data-highlight="true">
+                     <input type="range" name="diameterSliderIn" id="diameterSliderIn" value="0" min="0" max="12" data-highlight="true">
+                 </div>
+                 <div class="metricUnits">
+                     <input type="range" name="diameterSliderM" id="diameterSliderM" value="100" min="0" max="200" data-highlight="true" step="0.1">
+                 </div>
+             </div>
+             <div class="ui-block-c">
+                 <div class="englishUnits">
+                     feet <br>
+                     inches
+                 </div>
+                 <div class="metricUnits">
+                     meters
+                 </div>
+             </div>
+        
+             <!-- -->
+             <div class="ui-block-a">
+                     <strong>Straight Side Height</strong>
+             </div>
+             <div class="ui-block-b">
+                 <div class="englishUnits">
+                     <input type="range" name="sideHeightSliderFt" id="sideHeightSliderFt" value="100" min="0" max="200" data-highlight="true">
+                     <input type="range" name="sideHeightSliderIn" id="sideHeightSliderIn" value="0" min="0" max="12" data-highlight="true">
+                 </div>
+                 <div class="metricUnits">
+                     <input type="range" name="sideHeightSliderM" id="sideHeightSliderM" value="100" min="0" max="200" data-highlight="true" step="0.1">
+                 </div>
+             </div>
+             <div class="ui-block-c">
+                 <div class="englishUnits">
+                     feet <br>
+                     inches
+                 </div>
+                 <div class="metricUnits">
+                     meters
+                 </div>
+             </div>
+             <!-- start of top conical part -->
+             <div class="topConicalPart" style="display:none;">
+                
+                
+                
+                <div class="ui-block-a">
+                     <strong>Top Conical Angle</strong>
+                 </div>
+                 <div class="ui-block-b">
+                     <input type="range" name="topConicalAngle" id="topConicalAngle" value="90" min="0" max="180" data-highlight="true">
+                 </div>
+                 <div class="ui-block-c">
+                     Degree
+                 </div>
+                 
+                 <div class="ui-block-a">
+                     <strong>Use Top Conical Height</strong>
+                 </div>
+                 <div class="ui-block-b unitSelect">
+                       <select name="useTopConicalHeight" id="useTopConicalHeight" data-role="slider" style=" width: 100%">
+                       <option value="No">No</option>
+                         <option value="Yes">Yes</option>
+                         
+                       </select>
+                 </div>
+                
+                <div class="ui-block-a">
+                     <strong>Top Conical Height</strong>
+                 </div>
+                 <div class="ui-block-b">
+                 	<div class="englishUnits">
+                         <input type="range" name="topConicalHeightFt" id="topConicalHeightFt" value="100" min="0" max="200" data-highlight="true">
+                         <input type="range" name="topConicalHeightIn" id="topConicalHeightIn" value="0" min="0" max="12" data-highlight="true">
+                     </div>
+                     <div class="metricUnits">
+                         <input type="range" name="topConicalHeightM" id="topConicalHeightM" value="100" min="0" max="200" data-highlight="true" step="0.1">
+                     </div>
+                 </div>
+                 <div class="ui-block-c">
+                     <div class="englishUnits">
+                         feet <br>
+                         inches
+                     </div>
+                     <div class="metricUnits">
+                         meters
+                     </div>
+                 </div>
+             </div>
+             <!-- end of top conical part -->
+             <!-- start of bottom conical part -->
+             <div class="bottomConicalPart" style="display:none;">
+                
+                
+                <div class="ui-block-a">
+                     <strong>Bottom Conical Angle</strong>
+                 </div>
+                 <div class="ui-block-b">
+                     <input type="range" name="bottomConicalAngle" id="bottomConicalAngle" value="90" min="0" max="180" data-highlight="true">
+                 </div>
+                 <div class="ui-block-c">
+                     Degree
+                 </div>
+                 
+                 <div class="ui-block-a">
+                     <strong>Use Bottom Conical Height</strong>
+                 </div>
+                 <div class="ui-block-b unitSelect">
+                       <select name="useBottomConicalHeight" id="useBottomConicalHeight" data-role="slider" style=" width: 100%">
+                       <option value="No">No</option>
+                         <option value="Yes">Yes</option>
+                         
+                       </select>
+                 </div>
+                
+                <div class="ui-block-a">
+                     <strong>Bottom Conical Height</strong>
+                 </div>
+                 <div class="ui-block-b">
+                 	<div class="englishUnits">
+                         <input type="range" name="bottomConicalHeightFt" id="bottomConicalHeightFt" value="100" min="0" max="200" data-highlight="true">
+                         <input type="range" name="bottomConicalHeightIn" id="bottomConicalHeightIn" value="0" min="0" max="12" data-highlight="true">
+                     </div>
+                     <div class="metricUnits">
+                         <input type="range" name="bottomConicalHeightM" id="bottomConicalHeightM" value="100" min="0" max="200" data-highlight="true" step="0.1">
+                     </div>
+                 </div>
+                 <div class="ui-block-c">
+                     <div class="englishUnits">
+                         feet <br>
+                         inches
+                     </div>
+                     <div class="metricUnits">
+                         meters
+                     </div>
+                 </div>
+             </div>
+             <!-- end of bottom conical part -->
+        	</div> <!-- end of cyl-->
+            <div class="rectangular_value" style="display:none;">     
+             <!-- -->
+             <div class="ui-block-a">
+                     <strong>Width</strong>
+             </div>
+             <div class="ui-block-b">
+                 <div class="englishUnits">
+                     <input type="range" name="widthFt" id="widthFt" value="100" min="0" max="200" data-highlight="true">
+                     <input type="range" name="widthIn" id="widthIn" value="0" min="0" max="12" data-highlight="true">
+                 </div>
+                 <div class="metricUnits">
+                     <input type="range" name="widthM" id="widthM" value="100" min="0" max="200" data-highlight="true" step="0.1">
+                 </div>
+             </div>
+             <div class="ui-block-c">
+                 <div class="englishUnits">
+                     feet <br>
+                     inches
+                 </div>
+                 <div class="metricUnits">
+                     meters
+                 </div>
+             </div>
+        
+             <!-- -->
+             <div class="ui-block-a">
+                     <strong>Height</strong>
+             </div>
+             <div class="ui-block-b">
+                 <div class="englishUnits">
+                     <input type="range" name="heightFt" id="heightFt" value="100" min="0" max="200" data-highlight="true">
+                     <input type="range" name="heightIn" id="heightIn" value="0" min="0" max="12" data-highlight="true">
+                 </div>
+                 <div class="metricUnits">
+                     <input type="range" name="heightM" id="heightM" value="100" min="0" max="200" data-highlight="true" step="0.1">
+                 </div>
+             </div>
+             <div class="ui-block-c">
+                 <div class="englishUnits">
+                     feet <br>
+                     inches
+                 </div>
+                 <div class="metricUnits">
+                     meters
+                 </div>
+             </div>
+        
+             <!-- -->
+             <div class="ui-block-a">
+                     <strong>Length</strong>
+             </div>
+             <div class="ui-block-b">
+                 <div class="englishUnits">
+                     <input type="range" name="lengthFt" id="lengthFt" value="100" min="0" max="200" data-highlight="true">
+                     <input type="range" name="lengthIn" id="lengthIn" value="0" min="0" max="12" data-highlight="true">
+                 </div>
+                 <div class="metricUnits">
+                     <input type="range" name="lengthM" id="lengthM" value="100" min="0" max="200" data-highlight="true" step="0.1">
+                 </div>
+             </div>
+             <div class="ui-block-c">
+                 <div class="englishUnits">
+                     feet <br>
+                     inches
+                 </div>
+                 <div class="metricUnits">
+                     meters
+                 </div>
+             </div>
+             
+        </div><!-- end of rect -->
+            
+             <!-- -->
+             <div class="ui-block-a">
+                     <strong>Fill Level</strong>
+             </div>
+             <div class="ui-block-b">
+                 <div class="englishUnits">
+                     <input type="range" name="fillLevelSliderFt" id="fillLevelSliderFt" value="100" min="0" max="200" data-highlight="true">
+                     <input type="range" name="fillLevelSliderIn" id="fillLevelSliderIn" value="0" min="0" max="12" data-highlight="true">
+                 </div>
+                 <div class="metricUnits">
+                     <input type="range" name="fillLevelSliderM" id="fillLevelSliderM" value="100" min="0" max="200" data-highlight="true" step="0.1">
+                 </div>
+             </div>
+             <div class="ui-block-c">
+                 <div class="englishUnits">
+                     feet <br>
+                     inches
+                 </div>
+                 <div class="metricUnits">
+                     meters
+                 </div>
+             </div>
+        </div>
+  
+     </form>   
+        </div><!-- end of content -->
+        <div data-role="controlgroup" data-type="horizontal">
+        <a href="#tankGeometry" data-role="button" data-icon="refresh" id="resetForm" data-iconpos="left">Reset Form</a>
+		<a href="#tankCalc" id="btn_tankcalc" data-role="button" data-icon="arrow-r" data-iconpos="right" class="btn_getresult">View Results</a>
+        
+        </div>
+
+    </div>
+         
+</div>
+
+
+
+
+<div data-role="page" id="tankCalc" data-theme="a">
+    <div data-role="header" data-position="fixed">
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-left">
+          <a href="#mainMenu" data-icon="bars" data-iconpos="notext" data-role="button">Menu</a>
+        </div>
+        <h1>
+        <svg version="1.1" baseProfile="basic" id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+        height="40px" viewBox="0 0 398.149 398.14" xml:space="preserve">
+            <use xlink:href="#CELogo"></use>
+        </svg>
+        </h1>
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-right">
+          <a href="#about" data-role="button" data-icon="info" data-iconpos="notext" data-transition="slidefade">About</a>
+        </div>
+    </div>
+    
+    <div data-role="content">
+    
+        <h2>Volume Calculation Results</h2>
+    
+<div class="calcThumbnail">
+<a href="#tankDisplay">
+<svg version="1.1" baseProfile="basic" id="Layer_1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 600 600" xml:space="preserve" class="calcThumbOutline">
+	 <defs>
+		<linearGradient id="grad1" x1="0%" y1="100%" x2="0%" y2="0%">
+		  <stop offset="0%" style="stop-color:#39659A;stop-opacity:1" />
+		  <stop class="stop_lower" offset="20%" style="stop-color:#39659A;stop-opacity:1" />
+		  <stop class="stop_upper" offset="21%" style="stop-color:rgba(5,5,5,0);stop-opacity:0" />
+		  <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+		</linearGradient>
+	  </defs>
+	  
+  <use xlink:href="#tankTestFill" fill="url(#grad1)"></use>
+  <use xlink:href="#tankTestOutline"  ></use>
+</svg>
+</a>
+</div>
+<div class="calcDat">
+        <div class="tankvolume_result">
+          <h4>Tank Volume</h4>
+          <div class="englishUnits">
+            <p>
+              5101.2 gallons
+            </p>
+          </div>
+          <div class="metricUnits">
+            <p>
+              19309.0 liters
+            </p>
+          </div>
+         </div>
+         <div class="contentsvolume_result"> 
+          <h4>Contents Volume</h4>
+          <div class="englishUnits">
+            <p>
+              1417.0 gallons
+            </p>
+          </div>
+          <div class="metricUnits">
+            <p>
+              5363.6 liters
+            </p>
+          </div>
+        </div>  
+</div><!-- END calcDat -->
+<div class="clear"></div>
+          <a href="#emailResultsForm" data-role="button" data-icon="mail" data-transition="slide" data-rel="popup" data-position-to="window" >Email Results</a>
+          
+    <div data-role="popup" id="emailResultsForm" data-theme="b" class="ui-body">
+        <h3>Email Results To:</h3>
+        
+         <form>
+             <div class="ui-field-contain">
+                 <label for="order_name" class="ui-hidden-accessible">Name:</label>
+                 <input type="text" name="order_name" id="order_name" placeholder="Name" required>
+             </div>
+             <div class="ui-field-contain">
+                 <label for="order_company" class="ui-hidden-accessible">Company:</label>
+                 <input type="text" name="order_company" id="order_company" placeholder="Company" required>
+             </div>
+             <div class="ui-field-contain">
+                 <label for="order_email" class="ui-hidden-accessible">Email:</label>
+                 <input type="email" name="order_email" id="order_email" placeholder="Email" required>
+             </div>
+             <div class="ui-field-contain">
+                 <label for="order_comments" class="ui-hidden-accessible">Comments:</label>
+                 <textarea cols="40" rows="12" name="order_comments" id="order_comments" placeholder="Comments"></textarea>
+             </div>
+             <div class="ui-field-contain">
+
+             <div class="ui-grid-a">
+
+                 <div class="ui-block-a">
+                   <div class="ui-bar">
+                     <a data-rel="back" data-role="button" data-theme="b">Cancel</a>
+                   </div>
+                 </div>
+                 <div class="ui-block-b">
+                   <div class="ui-bar">
+                     <label for="emailResultsSend" class="ui-hidden-accessible">Send Email</label>
+                     <input type="submit" name="emailResultsSend" id="emailResultsSend" value="Send" />
+                   </div>
+                 </div>
+             </div>
+
+             </div>
+         </form>
+    </div><!-- END Form Popup -->
+    
+    <a href="#tankGeometry" data-role="button" data-icon="arrow-l" data-iconpos="left">Change Calculations</a>
+    
+    </div>
+         
+</div>
+
+
+
+
+
+
+
+<div data-role="page" id="tankCalcSaved" data-theme="a">
+    <div data-role="header" data-position="fixed">
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-left">
+          <a href="#mainMenu" data-icon="bars" data-iconpos="notext" data-role="button">Menu</a>
+        </div>
+        <h1>
+        <svg version="1.1" baseProfile="basic" id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+        height="40px" viewBox="0 0 398.149 398.14" xml:space="preserve">
+            <use xlink:href="#CELogo"></use>
+        </svg>
+        </h1>
+        <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-right">
+          <a href="#about" data-role="button" data-icon="info" data-iconpos="notext" data-transition="slidefade">About</a>
+        </div>
+    </div>
+    
+    <div data-role="content">
+    
+        <h2>Saved Results</h2>
+        
+        <div class="calcDatSaved ui-shadow ui-corner-all">
+          <h3>Saved Result 1</h3>
+          <div>
+            <h4>Tank Volume</h4>
+            <div class="englishUnits">
+              <p>
+                5101.2 gallons
+              </p>
+            </div>
+            <div class="metricUnits">
+              <p>
+                19309.0 liters
+              </p>
+            </div>
+          
+            <h4>Contents Volume</h4>
+            <div class="englishUnits">
+              <p>
+                1417.0 gallons
+              </p>
+            </div>
+            <div class="metricUnits">
+              <p>
+                5363.6 liters
+              </p>
+            </div>
+          </div>  
+        </div><!-- END calcDatSaved -->
+        
+        <div class="calcDatSaved ui-shadow ui-corner-all">
+          <h3>Saved Result 2</h3>
+          <div>
+            <h4>Tank Volume</h4>
+            <div class="englishUnits">
+              <p>
+                5101.2 gallons
+              </p>
+            </div>
+            <div class="metricUnits">
+              <p>
+                19309.0 liters
+              </p>
+            </div>
+          
+            <h4>Contents Volume</h4>
+            <div class="englishUnits">
+              <p>
+                1417.0 gallons
+              </p>
+            </div>
+            <div class="metricUnits">
+              <p>
+                5363.6 liters
+              </p>
+            </div>
+          </div>  
+        </div><!-- END calcDatSaved -->
+        
+        <div class="calcDatSaved ui-shadow ui-corner-all">
+          <h3>Saved Result 3</h3>
+          <div>
+            <h4>Tank Volume</h4>
+            <div class="englishUnits">
+              <p>
+                5101.2 gallons
+              </p>
+            </div>
+            <div class="metricUnits">
+              <p>
+                19309.0 liters
+              </p>
+            </div>
+          
+            <h4>Contents Volume</h4>
+            <div class="englishUnits">
+              <p>
+                1417.0 gallons
+              </p>
+            </div>
+            <div class="metricUnits">
+              <p>
+                5363.6 liters
+              </p>
+            </div>
+          </div>  
+        </div><!-- END calcDatSaved -->
+        
+        <div class="calcDatSaved ui-shadow ui-corner-all">
+          <h3>Saved Result 4</h3>
+          <div>
+            <h4>Tank Volume</h4>
+            <div class="englishUnits">
+              <p>
+                5101.2 gallons
+              </p>
+            </div>
+            <div class="metricUnits">
+              <p>
+                19309.0 liters
+              </p>
+            </div>
+          
+            <h4>Contents Volume</h4>
+            <div class="englishUnits">
+              <p>
+                1417.0 gallons
+              </p>
+            </div>
+            <div class="metricUnits">
+              <p>
+                5363.6 liters
+              </p>
+            </div>
+          </div>  
+        </div><!-- END calcDatSaved -->
+
+    </div><!-- END .tankCalcSaved .content -->
+         
+</div>
+
+
+<script src="lib/fastclick.js"></script>
+<script src="lib/imgcache.js"></script>
+<script src="lib/jquery.js"></script>
+<script src="lib/jquery.validate.min.js"></script>
+<script src="lib/jquery.validate.am.min.js"></script>
+<script>
+    $(document).on("mobileinit", function() {
+        $.mobile.defaultPageTransition = 'slidefade';
+    });
+</script>
+<script src="lib/jquery.mobile-1.4.2.min.js"></script>
+
+<!--
+<script src="lib/mobiscroll.core.js"></script>
+<script src="lib/mobiscroll.scroller.js"></script>
+<script src="lib/mobiscroll.select.js"></script>
+<script src="lib/mobiscroll.scroller.ios7.js"></script>
+
+<script src="js/setup.js"></script>
+<script src="js/cache.js"></script>
+<script src="js/routing.js"></script>
+-->
+<script src="js/functions.js"></script>
+<script src="js/custom.js"></script>
+<script>
+
+    $("body>[data-role='panel']").panel();
+    $("body>[data-role='panel']").trigger('create');
+	
+	function getValueByUnit(title, unit){
+		if (unit == 'english'){
+			var v_ft = $('#'+title+'Ft').val();
+			var v_in = $('#'+title+'In').val();
+			return v_ft*1 + v_in/12;
+		}else{
+			var v_m = $('#'+title+'M').val();
+			return v_m*1;
+		}
+	}
+	
+	function getY(shape, diameter, b_useheight){
+		switch (shape){
+		case 'ASME': case 'Elipsoidal':
+			return diameter/4;
+		case 'Flat':
+			return 0;
+		case 'Hemispherical':
+			return diameter/2;
+		case 'Conical':
+			return b_useheight;
+		}
+	}
+	$('#shapeType').bind('change', function(){
+		if ($(this).val() == 'Cylindrical'){
+			$('.shape_rect').hide();
+			$('.shape_cyl').show();
+			$('.rectangular_value').hide();
+			$('.cylinder_value').show();
+		}
+		if ($(this).val() == 'Rectangular'){
+			$('.shape_cyl').hide();
+			$('.shape_rect').show();
+			$('.cylinder_value').hide();
+			$('.rectangular_value').show();
+		}
+	});
+	$('#shapeBottom_Cylindrical').bind('change', function(){
+		if ($(this).val() == 'Conical'){
+			$('.bottomConicalPart').show();
+		}else{
+			$('.bottomConicalPart').hide();
+		}
+	});
+	$('#shapeTop_Cylindrical').bind('change', function(){
+		if ($(this).val() == 'Conical'){
+			$('.topConicalPart').show();
+		}else{
+			$('.topConicalPart').hide();
+		}
+	});
+	$('#shapeBottom_Cylindrical').bind('change', function(){
+		
+	});
+	$('.btn_getresult').click(function(){
+		drawTank();
+		var msg=computeVolumes();
+		console.log(msg);
+	});
+	$('#resetForm').click(function(e){
+		$('#dimensions')[0].reset();
+		$('#shape')[0].reset();
+	});
+	$('#btn_tankcalc').click(function(e){
+		var shapeType = $('#shapeType').val();
+		var topShape = $('#shapeTop_'+shapeType).val();
+		var bottomShape = $('#shapeBottom_'+shapeType).val();
+		console.log(shapeType);
+		console.log(topShape);
+		console.log(bottomShape);
+		if (!(shapeType!='none' && topShape!='none' && bottomShape!='none')){
+			return false;
+		}else{
+			return true;
+		}
+	});
+	function drawTank(){
+		var shapeType = $('#shapeType').val();
+
+		var topShape = $('#shapeTop_'+shapeType).val();
+		var bottomShape = $('#shapeBottom_'+shapeType).val();
+		
+		var s_unit = $('#units').val();
+		var v_diameter;
+		var v_sideheight;
+		var v_filllevel;
+		var v_topconicalheight;
+		var v_bottomconicalheight;
+		var v_topconicalangle;
+		var v_bottomconicalangle;
+		var b_useTopConicalHeight = $('#useTopConicalHeight').val();
+		var b_useBottomConicalHeight = $('#useBottomConicalHeight').val();
+		
+		if (shapeType == "Cylindrical"){
+			v_diameter = getValueByUnit('diameterSlider', s_unit);
+			v_sideheight = getValueByUnit('sideHeightSlider', s_unit);
+			v_filllevel = getValueByUnit('fillLevelSlider', s_unit);
+			v_topconicalheight = getValueByUnit('topConicalHeight', s_unit);
+			v_bottomconicalheight = getValueByUnit('bottomConicalHeight', s_unit);
+			v_topconicalangle = $('#topConicalAngle').val();
+			v_bottomconicalangle = $('#bottomConicalAngle').val();
+			
+			if (b_useTopConicalHeight == 'No'){
+				v_topconicalheight = v_diameter / 2 / Math.tan(3.1415926535897931 * v_topconicalangle / 2 /180);
+			}
+			if (b_useBottomConicalHeight == 'No'){
+				v_bottomconicalheight = v_diameter / 2 / Math.tan(3.1415926535897931 * v_bottomconicalangle / 2 / 180);
+			}
+		}else{
+			v_diameter = getValueByUnit('width', s_unit);
+			v_sideheight = getValueByUnit('height', s_unit);
+			v_filllevel = getValueByUnit('fillLevelSlider', s_unit);
+		}
+		
+		var y1 = getY(topShape, v_diameter, v_topconicalheight);
+		var y2 = v_sideheight;
+		var y3 = getY(bottomShape, v_diameter, v_bottomconicalheight);
+		var x1 = v_diameter;
+		
+		var t_width = 600;
+		var t_height =600;
+		
+		var x_limit = v_diameter;
+		var y_limit = y1+y2+y3;
+		var p = 600/y_limit;
+		
+		var sx = (t_width - x_limit*p) / 2;
+		var sy = y1*p;
+			
+		var path_string = "M" + sx + "," + sy +
+			"v" + (y2*p);
+		if (bottomShape == 'Conical'){
+			var x2 = v_bottomconicalheight * Math.tan(3.1415926535897931 * v_bottomconicalangle / 2 / 180);
+			path_string +="l" + (x2 * p) + "," + (v_bottomconicalheight*p) +
+						"l" + ((x1 - x2*2)*p) + "," + 0 + 
+						"l" + (x2*p) + "," + (-v_bottomconicalheight*p);
+		}else{
+			path_string +="a" + (x1/2*p) + "," + (y3*p) + 
+					" 0 0, 0 " +
+					(x1*p) + "," + 0;
+		}
+		path_string +="v" + (-y2*p);
+		if (topShape == 'Conical'){
+			var x2 = v_topconicalheight * Math.tan(3.1415926535897931 * v_topconicalangle / 2 / 180);
+			path_string +="l" + (-x2*p) + "," + (-v_topconicalheight*p) + 
+						"l" + (-(x1 - x2*2)*p) + "," + 0 + 
+						"l" + (-x2 * p) + "," + (v_topconicalheight*p);
+		}else{
+			path_string +="a" + (x1/2*p) + "," + (y1*p) +
+					" 0 0, 0 " +
+					(-x1*p) + "," + 0;
+		}
+		
+		path_string +="z";
+		
+		$('.stop_lower').attr('offset', (v_filllevel*p*100/t_height)+'%');
+		$('.stop_upper').attr('offset', (v_filllevel*p*100/t_height + 1)+'%');
+		
+		$('#tankTestOutline').attr('d', path_string);
+		$('#tankTestFill').attr('d', path_string);
+		
+		console.log(path_string);
+	}
+	
+</script>
+</body>
+</html>
